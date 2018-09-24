@@ -1,0 +1,33 @@
+Elemento:
+   Atributos:
+	-Bit[]: String;
+	-NoUnos:int
+	-Posiciones: String;
+	-funcion: String;
+   Metodos:
+	+Contar:void;
+// saber el numero de unos o x;
+	+BuscarPosicion:void;
+	+PosicionTabla:String;
+//dan datos del numero, en binario y lo que representa;
+	+PosicionUX:int[];
+//saber donde estan los unos y x;
+	+getters and setters;
+
+Mac:
+   Atributos:
+	-Minterminos:int[];
+	-tabla: ArrayList()<Elementos>;
+	-min:int;
+	-max:int;
+   Metodos:
+	+Agregar(elemento e): void;
+//en Agregar definiremos max y min según la cantidad de unos que tengan
+//obviamente se agragaran dentro de un loop
+//Y la tabla de minterminos iniciara con todos los terminos con un f=1 o f=x;
+	+Agrupación: void;
+//aqui se crean tablas temporales de min a max,
+//agruparemos segun su NoUnos,
+//aquí mismo se hara la comparatiba se volvera a sobre escribir el arraylist
+	
+	
