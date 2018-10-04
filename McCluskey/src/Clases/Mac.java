@@ -93,6 +93,16 @@ public class Mac {
                                             }
                                         }
                                     }
+                                    
+                                    for(int m=0;m<unJ;m++) {
+                                        if(inicio==false){
+                                            if(grupo.get(ii).get(j).getPosX()[0]==grupo.get(jj).get(k).getPosX()[0]) {
+                                                if(grupo.get(ii).get(j).getPosX()[l]==grupo.get(jj).get(k).getPosX()[m]) {
+                                                    x++;
+                                                }
+                                            }
+                                        }
+                                    }
                                 } catch(Exception e) {
 //                                    System.out.println("Error");
                                 }
@@ -100,27 +110,29 @@ public class Mac {
 
                             try {
                                 if(u>=grupo.get(ii).get(j).getPosUX().length) {
-                                    String[] aux = new String[grupo.get(ii).get(j).getBit().length];
-                                    for(int n=0;n<grupo.get(ii).get(0).getBit().length;n++) {
-                                        if(grupo.get(ii).get(j).getBit()[n].equals(grupo.get(jj).get(k).getBit()[n])) {
-                                            aux[n]=grupo.get(ii).get(j).getBit()[n];
-                                        } else {
-                                            aux[n]="x";
+                                    if(x>=grupo.get(ii).get(j).getPosX().length) {
+                                        String[] aux = new String[grupo.get(ii).get(j).getBit().length];
+                                        for(int n=0;n<grupo.get(ii).get(0).getBit().length;n++) {
+                                            if(grupo.get(ii).get(j).getBit()[n].equals(grupo.get(jj).get(k).getBit()[n])) {
+                                                aux[n]=grupo.get(ii).get(j).getBit()[n];
+                                            } else {
+                                                aux[n]="x";
+                                            }
                                         }
-                                    }
-                                
-                                    grupo.get(ii).get(j).setMarca(1);
-                                    grupo.get(jj).get(k).setMarca(1);
+                                        
+                                        grupo.get(ii).get(j).setMarca(1);
+                                        grupo.get(jj).get(k).setMarca(1);
                                     
-                                    Elemento e = new Elemento(aux,""+grupo.get(ii).get(j).getPosicionTabla()+"-"+grupo.get(jj).get(k).getPosicionTabla());
-                                    boolean exist = false;
-                                    for(int o=0;o<b.size();o++) {
-                                        if(Arrays.equals(e.getBit(), b.get(o).getBit())) {
-                                            exist = true;
+                                        Elemento e = new Elemento(aux,""+grupo.get(ii).get(j).getPosicionTabla()+"-"+grupo.get(jj).get(k).getPosicionTabla());
+                                        boolean exist = false;
+                                        for(int o=0;o<b.size();o++) {
+                                            if(Arrays.equals(e.getBit(), b.get(o).getBit())) {
+                                                exist = true;
+                                            }
                                         }
-                                    }
-                                    if(exist==false) {
-                                        b.add(e);
+                                        if(exist==false) {
+                                            b.add(e);
+                                        }
                                     }
                                 }
                             } catch(Exception e) {
@@ -153,8 +165,18 @@ public class Mac {
                 grupo.add(grupo2.get(i));
             }
             inicio = false;
-        } while(grupo.size()>1);
+        } while(grupo.size()>0);
         
-        
+        for(int i=0;i<minusterminos.size();i++) {
+            if(i==0){
+                this.res = this.res+Interprete.convertir(minusterminos.get(i).getBit());
+            }else{
+                this.res = this.res+"+"+Interprete.convertir(minusterminos.get(i).getBit());
+            }
+        }
+    }
+    
+    public String getRes() {
+        return this.res;
     }
 }

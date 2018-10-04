@@ -47,10 +47,10 @@ public class Test {
         
         m.Agrupacion();
         
-//        System.out.println("! -> significa negacion\nEjemplo : A! = A negada\n");
-//        System.out.println("El resultado final es : "+m.getResultado());
-//        System.out.println("\n\nFalta la parte de memo para minimizar todo lo posible, ahorita arroja todo el resultado tal cual");
-//        System.out.println();
+        System.out.println("! -> significa negacion\nEjemplo : A! = A negada\n");
+        System.out.println("El resultado final es : "+m.getRes());
+        System.out.println("\n\nFalta la parte de memo para minimizar todo lo posible, ahorita arroja todo el resultado tal cual");
+        System.out.println();
         
     }
 }
