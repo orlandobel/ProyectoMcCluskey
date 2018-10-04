@@ -6,6 +6,7 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -41,7 +42,7 @@ public class Mac {
     }
     
     public void Agrupacion() {
-        int fin = 0;
+        boolean inicio = true;
         ArrayList<ArrayList<Elemento>> grupo = new ArrayList<ArrayList<Elemento>>(max); //arreglo n elementos
         ArrayList<Elemento> minusterminos = new ArrayList<>();
         
@@ -62,7 +63,7 @@ public class Mac {
             }
         }
         
-        do{
+        do {
             int ii=0;
             int jj=1;
             ArrayList<ArrayList<Elemento>> grupo2 = new ArrayList<ArrayList<Elemento>>();
@@ -74,13 +75,22 @@ public class Mac {
                         for(int k=0;k<grupo.get(jj).size();k++) {
                             int unI = grupo.get(ii).get(0).getPosUX().length;
                             int unJ = grupo.get(jj).get(0).getPosUX().length;
-                            int c = 0;
+                            int u = 0;
+                            int x = 0;
 
                             for(int l=0;l<unI;l++) {
                                 try {
                                     for(int m=0;m<unJ;m++) {
-                                        if(grupo.get(ii).get(j).getPosUX()[l]==grupo.get(jj).get(k).getPosUX()[m]) {
-                                            c++;
+                                        if(inicio==true){
+                                            if(grupo.get(ii).get(j).getPosUX()[l]==grupo.get(jj).get(k).getPosUX()[m]) {
+                                                u++;
+                                            }
+                                        } else {
+                                            if(grupo.get(ii).get(j).getPosX()[0]==grupo.get(jj).get(k).getPosX()[0]) {
+                                                if(grupo.get(ii).get(j).getPosUX()[l]==grupo.get(jj).get(k).getPosUX()[m]) {
+                                                    u++;
+                                                }
+                                            }
                                         }
                                     }
                                 } catch(Exception e) {
@@ -89,7 +99,7 @@ public class Mac {
                             }
 
                             try {
-                                if(c>=grupo.get(ii).get(j).getPosUX().length) {
+                                if(u>=grupo.get(ii).get(j).getPosUX().length) {
                                     String[] aux = new String[grupo.get(ii).get(j).getBit().length];
                                     for(int n=0;n<grupo.get(ii).get(0).getBit().length;n++) {
                                         if(grupo.get(ii).get(j).getBit()[n].equals(grupo.get(jj).get(k).getBit()[n])) {
@@ -103,12 +113,20 @@ public class Mac {
                                     grupo.get(jj).get(k).setMarca(1);
                                     
                                     Elemento e = new Elemento(aux,""+grupo.get(ii).get(j).getPosicionTabla()+"-"+grupo.get(jj).get(k).getPosicionTabla());
-                                    b.add(e);
+                                    boolean exist = false;
+                                    for(int o=0;o<b.size();o++) {
+                                        if(Arrays.equals(e.getBit(), b.get(o).getBit())) {
+                                            exist = true;
+                                        }
+                                    }
+                                    if(exist==false) {
+                                        b.add(e);
+                                    }
                                 }
                             } catch(Exception e) {
                                 
                             }
-                            c=0;
+                            u=0;
                         }
                         
                     }catch(Exception e) {
@@ -134,8 +152,9 @@ public class Mac {
             for(int i=0;i<grupo2.size();i++) {
                 grupo.add(grupo2.get(i));
             }
-            fin++;
-        } while(grupo.size()>0);
+            inicio = false;
+        } while(grupo.size()>1);
+        
         
     }
 }

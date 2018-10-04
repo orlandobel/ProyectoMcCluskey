@@ -91,6 +91,7 @@ public class Elemento {
     }
 
     public int[] getPosX() {
+        PosicionX();
         return posX;
     }
 
