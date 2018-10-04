@@ -41,12 +41,9 @@ public class Mac {
     }
     
     public void Agrupacion() {
+        int fin = 0;
         ArrayList<ArrayList<Elemento>> grupo = new ArrayList<ArrayList<Elemento>>(max); //arreglo n elementos
-//        ArrayList<Elemento> cero = new ArrayList<>();
-//        ArrayList<Elemento> uno = new ArrayList<>();
-//        ArrayList<Elemento> dos = new ArrayList<>();
-//        ArrayList<Elemento> tres = new ArrayList<>();
-//        ArrayList<Elemento> cuatro = new ArrayList<>();
+        ArrayList<Elemento> minusterminos = new ArrayList<>();
         
         for(int i=min;i<=max;i++) { //agrupacion n elementos
             ArrayList<Elemento> aux = new ArrayList<>();
@@ -65,51 +62,80 @@ public class Mac {
             }
         }
         
-        int ii=0;
-        int jj=1;
-        for(int i=0;i<grupo.size();i++) {
-            for(int j=0;j<=grupo.get(ii).size();j++) {
-                try {
-                    for(int k=0;k<grupo.get(jj).size();k++) {
-                        int unI = grupo.get(ii).get(0).getPosUX().length;
-                        int unJ = grupo.get(jj).get(0).getPosUX().length;
-                        int c = 0;
+        do{
+            int ii=0;
+            int jj=1;
+            ArrayList<ArrayList<Elemento>> grupo2 = new ArrayList<ArrayList<Elemento>>();
+            for(int i=0;i<grupo.size();i++) {
+                ArrayList<Elemento> b = new ArrayList<>();
+                for(int j=0;j<=grupo.get(ii).size();j++) {
+                    try {
+                        
+                        for(int k=0;k<grupo.get(jj).size();k++) {
+                            int unI = grupo.get(ii).get(0).getPosUX().length;
+                            int unJ = grupo.get(jj).get(0).getPosUX().length;
+                            int c = 0;
 
-                        for(int l=0;l<unI;l++) {
-                            try {
-                                for(int m=0;m<unJ;m++) {
-                                    if(grupo.get(ii).get(j).getPosUX()[l]==grupo.get(jj).get(k).getPosUX()[m]) {
-                                        c++;
+                            for(int l=0;l<unI;l++) {
+                                try {
+                                    for(int m=0;m<unJ;m++) {
+                                        if(grupo.get(ii).get(j).getPosUX()[l]==grupo.get(jj).get(k).getPosUX()[m]) {
+                                            c++;
+                                        }
                                     }
+                                } catch(Exception e) {
+//                                    System.out.println("Error");
+                                }
+                            }
+
+                            try {
+                                if(c>=grupo.get(ii).get(j).getPosUX().length) {
+                                    String[] aux = new String[grupo.get(ii).get(j).getBit().length];
+                                    for(int n=0;n<grupo.get(ii).get(0).getBit().length;n++) {
+                                        if(grupo.get(ii).get(j).getBit()[n].equals(grupo.get(jj).get(k).getBit()[n])) {
+                                            aux[n]=grupo.get(ii).get(j).getBit()[n];
+                                        } else {
+                                            aux[n]="x";
+                                        }
+                                    }
+                                
+                                    grupo.get(ii).get(j).setMarca(1);
+                                    grupo.get(jj).get(k).setMarca(1);
+                                    
+                                    Elemento e = new Elemento(aux,""+grupo.get(ii).get(j).getPosicionTabla()+"-"+grupo.get(jj).get(k).getPosicionTabla());
+                                    b.add(e);
                                 }
                             } catch(Exception e) {
-//                                System.out.println("Error");
+                                
                             }
+                            c=0;
                         }
-
-                        try {
-                            if(c>grupo.get(ii).get(j).getPosUX().length) {
-                                String[] aux = new String[grupo.get(ii).get(j).getBit().length];
-                                for(int n=0;n<grupo.get(ii).get(0).getBit().length;n++) {
-                                    if(grupo.get(ii).get(j).getBit()[n].equals(grupo.get(jj).get(k).getBit()[n])) {
-                                        aux[n]=grupo.get(ii).get(j).getBit()[n];
-                                    } else {
-                                        aux[n]="x";
-                                    }
-                                }
-                            }
-                        } catch(Exception e) {
-//                            System.out.println("Error2");
-                        }
-                        c=0;
+                        
+                    }catch(Exception e) {
+                    
                     }
-                }catch(Exception e) {
-//                    System.out.println("Error3");
                 }
+                if(b.size()>0) {
+                    grupo2.add(b);
+                }
+                ii++;
+                jj++;
             }
-            ii++;
-            jj++;
-        }
+            int tam = grupo.size();
+            for(int i=0;i<tam;i++) {
+                for(int j=0;j<grupo.get(0).size();j++) {
+                    if(grupo.get(0).get(j).getMarca()==0) {
+                        minusterminos.add(grupo.get(0).get(j));
+                    }
+                }
+                grupo.remove(0);
+            }
+        
+            for(int i=0;i<grupo2.size();i++) {
+                grupo.add(grupo2.get(i));
+            }
+            fin++;
+        } while(grupo.size()>0);
         
     }
 }
