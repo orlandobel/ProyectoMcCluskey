@@ -167,15 +167,105 @@ public class Mac {
             inicio = false;
         } while(grupo.size()>0);
         
-        for(int i=0;i<minusterminos.size();i++) {
-            if(i==0){
-                this.res = this.res+Interprete.convertir(minusterminos.get(i).getBit());
-            }else{
-                this.res = this.res+"+"+Interprete.convertir(minusterminos.get(i).getBit());
+        //Parte de memo D:
+        
+        ArrayList<Elemento> simpli = new ArrayList<>();
+        int[] cuantos = new int[this.minterminos.length];
+        
+        for(int x=0; x<this.minterminos.length;x++){
+            int z= this.minterminos[x];
+            int xy=x;
+            cuantos[x]=0;
+           
+            minusterminos.forEach((Elemento cfinal1) -> {
+                String datos[]=cfinal1.getPosicionTabla().split("-");
+                
+                for (String dato : datos) {
+                    int y = Integer.parseInt(dato);
+                    
+                    if(z==y){
+                      
+                      cuantos[xy]++;
+                      break;
+                    }
+                }
+            });
+        }
+        for (int x =0; x<cuantos.length;x++){
+            
+            int z=x;
+            if (cuantos[x]==1){
+                minusterminos.forEach((Elemento cfinal1) -> {
+                String datos[]=cfinal1.getPosicionTabla().split("-");
+                for (String dato : datos) {
+                    int y = Integer.parseInt(dato);
+                    if (y==this.minterminos[z]){
+                        simpli.add(cfinal1);
+                        System.out.println("Entro nuevo mintermino");
+                        break;
+                    }
+                }
+            });
             }
         }
-    }
+        minusterminos.forEach((Elemento cfinal1) -> {
+            System.out.println("Marca de : "+ cfinal1.getPosicionTabla()+ " existe: "+cfinal1.getMarca());
+            
+        });
+        simpli.forEach((Elemento simplif)->{
+            minusterminos.remove((Elemento) simplif);
+        });
+        
+        //fin de 1 sola solución
+        
+        minusterminos.forEach((Elemento cfinal1) -> {
+            System.out.println("Entro: "+ cfinal1.getPosicionTabla());
+            String datos[]=cfinal1.getPosicionTabla().split("-");
+            for (String dato : datos) {   
+                System.out.println("Entro a: "+ dato);
+                int z= Integer.parseInt(dato);
+                simpli.forEach((Elemento simpli1) -> {
+                    System.out.println("Entro: "+ simpli1.getPosicionTabla());
+                    String sd[]=simpli1.getPosicionTabla().split("-");   
+                    for (String sim : sd) {
+                        System.out.println("Entro a: "+ sim);
+                        int y = Integer.parseInt(sim);
+                        
+                            
+                        if(y == z){
+                            System.out.println("Entro: "+ z+ " = "+y);
+                            cfinal1.setMarca(-1);
+                            System.out.println("Marca de : "+ cfinal1.getPosicionTabla()+ " existe: "+cfinal1.getMarca());
+                            break;
+                        }
+                    }
+                });
+            }
+            if(cfinal1.getMarca()!=-1){
+                simpli.add(cfinal1);
+            }
+        });
+        
+        minusterminos.forEach((Elemento cfinal1) -> {
+            System.out.println("Marca de : "+ cfinal1.getPosicionTabla()+ " existe: "+cfinal1.getMarca());
+            
+        });
+        
+        
+        
+        for(int i=0;i<simpli.size();i++) {
+            if(i==0){
+                this.res = this.res+Interprete.convertir(simpli.get(i).getBit());
+            }else{
+                this.res = this.res+"+"+Interprete.convertir(simpli.get(i).getBit());
+            }
+        }
     
+    
+        
+        
+    }
+        // Arreglo del codigo de memo
     public String getRes() {
         return this.res;
     }
