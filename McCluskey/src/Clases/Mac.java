@@ -17,7 +17,6 @@ public class Mac {
     private int[] minterminos;
     private int min;
     private int max;
-    private int aize;
     private String res;
     private ArrayList<Elemento> tabla;
     
@@ -75,6 +74,10 @@ public class Mac {
                         for(int k=0;k<grupo.get(jj).size();k++) {
                             int unI = grupo.get(ii).get(0).getPosUX().length;
                             int unJ = grupo.get(jj).get(0).getPosUX().length;
+                            
+                            int xI = grupo.get(ii).get(0).getPosX().length;
+                            int xJ = grupo.get(jj).get(0).getPosX().length;
+                            
                             int u = 0;
                             int x = 0;
 
@@ -93,18 +96,23 @@ public class Mac {
                                             }
                                         }
                                     }
-                                    
-                                    for(int m=0;m<unJ;m++) {
-                                        if(inicio==false){
+                                } catch(Exception e) {
+//                                    System.out.println("Error");
+                                }
+                            }
+                            if(inicio==false){
+                                for(int l=0;l<xI;l++) {
+                                 try {
+                                    for(int m=0;m<xJ;m++) {
                                             if(grupo.get(ii).get(j).getPosX()[0]==grupo.get(jj).get(k).getPosX()[0]) {
                                                 if(grupo.get(ii).get(j).getPosX()[l]==grupo.get(jj).get(k).getPosX()[m]) {
                                                     x++;
                                                 }
                                             }
                                         }
+                                    } catch(Exception e) {
+                                    
                                     }
-                                } catch(Exception e) {
-//                                    System.out.println("Error");
                                 }
                             }
 

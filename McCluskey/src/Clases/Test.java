@@ -14,11 +14,11 @@ public class Test {
         // TODO code application logic here
         int min[] = new int[]{4,7,9,10};
         
-        String v1[] = new String[]{"0","0","0","0"};
-        String v2[] = new String[]{"0","0","0","1"};
-        String v3[] = new String[]{"0","0","1","0"};
+        String v1[] = new String[]{"0","0","0","0"};//
+        String v2[] = new String[]{"0","0","0","1"};//
+        String v3[] = new String[]{"0","0","1","0"};//
         String v4[] = new String[]{"0","0","1","1"};
-        String v5[] = new String[]{"0","1","0","0"};
+        String v5[] = new String[]{"0","1","0","0"};//
         String v6[] = new String[]{"0","1","1","1"};
         String v7[] = new String[]{"1","0","0","1"};
         String v8[] = new String[]{"1","0","1","0"};
