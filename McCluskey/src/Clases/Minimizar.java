@@ -12,15 +12,15 @@ import java.util.Arrays;
  *
  * @author orlando
  */
-public class Mac {
+public class Minimizar {
  
     private int[] minterminos;
     private int min;
     private int max;
     private String res;
-    private ArrayList<Elemento> tabla;
+    private ArrayList<Bits> tabla;
     
-    public Mac(int minterminos[]) {
+    public Minimizar(int minterminos[]) {
         this.minterminos = minterminos;
         this.tabla = new ArrayList<>();
         this.res = " ";
@@ -29,7 +29,7 @@ public class Mac {
         this.max = 0;
     }
     
-    public void Agregar(Elemento e) {
+    public void Agregar(Bits e) {
         this.tabla.add(e);
         
         if(e.getUnos()<min) {
@@ -42,11 +42,11 @@ public class Mac {
     
     public void Agrupacion() {
         boolean inicio = true;
-        ArrayList<ArrayList<Elemento>> grupo = new ArrayList<ArrayList<Elemento>>(max); //arreglo n elementos
-        ArrayList<Elemento> minusterminos = new ArrayList<>();
+        ArrayList<ArrayList<Bits>> grupo = new ArrayList<ArrayList<Bits>>(max); //arreglo n elementos
+        ArrayList<Bits> minusterminos = new ArrayList<>();
         
         for(int i=min;i<=max;i++) { //agrupacion n elementos
-            ArrayList<Elemento> aux = new ArrayList<>();
+            ArrayList<Bits> aux = new ArrayList<>();
             for(int j=0;j<this.tabla.size();j++) {
                 if(this.tabla.get(j).getUnos()==i) {
                     aux.add(this.tabla.get(j));
@@ -65,9 +65,9 @@ public class Mac {
         do {
             int ii=0;
             int jj=1;
-            ArrayList<ArrayList<Elemento>> grupo2 = new ArrayList<ArrayList<Elemento>>();
+            ArrayList<ArrayList<Bits>> grupo2 = new ArrayList<ArrayList<Bits>>();
             for(int i=0;i<grupo.size();i++) {
-                ArrayList<Elemento> b = new ArrayList<>();
+                ArrayList<Bits> b = new ArrayList<>();
                 for(int j=0;j<=grupo.get(ii).size();j++) {
                     try {
                         
@@ -131,7 +131,7 @@ public class Mac {
                                         grupo.get(ii).get(j).setMarca(1);
                                         grupo.get(jj).get(k).setMarca(1);
                                     
-                                        Elemento e = new Elemento(aux,""+grupo.get(ii).get(j).getPosicionTabla()+"-"+grupo.get(jj).get(k).getPosicionTabla());
+                                        Bits e = new Bits(aux,""+grupo.get(ii).get(j).getPosicionTabla()+"-"+grupo.get(jj).get(k).getPosicionTabla());
                                         boolean exist = false;
                                         for(int o=0;o<b.size();o++) {
                                             if(Arrays.equals(e.getBit(), b.get(o).getBit())) {
@@ -177,7 +177,7 @@ public class Mac {
         
         //Parte de memo D:
         
-        ArrayList<Elemento> simpli = new ArrayList<>();
+        ArrayList<Bits> simpli = new ArrayList<>();
         int[] cuantos = new int[this.minterminos.length];
         
         for(int x=0; x<this.minterminos.length;x++){
@@ -185,8 +185,8 @@ public class Mac {
             int xy=x;
             cuantos[x]=0;
            
-            minusterminos.forEach((Elemento cfinal1) -> {
-                String datos[]=cfinal1.getPosicionTabla().split("-");
+            minusterminos.forEach((Bits Simplificar) -> {
+                String datos[]=Simplificar.getPosicionTabla().split("-");
                 
                 for (String dato : datos) {
                     int y = Integer.parseInt(dato);
@@ -203,12 +203,12 @@ public class Mac {
             
             int z=x;
             if (cuantos[x]==1){
-                minusterminos.forEach((Elemento cfinal1) -> {
-                String datos[]=cfinal1.getPosicionTabla().split("-");
+                minusterminos.forEach((Bits Simplificar) -> {
+                String datos[]=Simplificar.getPosicionTabla().split("-");
                 for (String dato : datos) {
                     int y = Integer.parseInt(dato);
                     if (y==this.minterminos[z]){
-                        simpli.add(cfinal1);
+                        simpli.add(Simplificar);
                         System.out.println("Entro nuevo mintermino");
                         break;
                     }
@@ -216,46 +216,64 @@ public class Mac {
             });
             }
         }
-        minusterminos.forEach((Elemento cfinal1) -> {
-            System.out.println("Marca de : "+ cfinal1.getPosicionTabla()+ " existe: "+cfinal1.getMarca());
+        minusterminos.forEach((Bits Simplificar) -> {
+            
+            System.out.println("Marca de : "+ Simplificar.getPosicionTabla()+ " existe: "+Simplificar.getMarca());
             
         });
-        simpli.forEach((Elemento simplif)->{
-            minusterminos.remove((Elemento) simplif);
+        simpli.forEach((Bits simplif)->{
+            minusterminos.remove((Bits) simplif);
         });
         
         //fin de 1 sola solución
-        
-        minusterminos.forEach((Elemento cfinal1) -> {
-            System.out.println("Entro: "+ cfinal1.getPosicionTabla());
-            String datos[]=cfinal1.getPosicionTabla().split("-");
+
+        minusterminos.forEach((Bits Simplificar) -> {
+            System.out.println("Entro dato con: "+ Simplificar.getPosicionTabla());
+            String datos[]=Simplificar.getPosicionTabla().split("-");
+            boolean aux=false;
+            
             for (String dato : datos) {   
-                System.out.println("Entro a: "+ dato);
+                System.out.println("Entro dato a: "+ dato);
                 int z= Integer.parseInt(dato);
-                simpli.forEach((Elemento simpli1) -> {
-                    System.out.println("Entro: "+ simpli1.getPosicionTabla());
-                    String sd[]=simpli1.getPosicionTabla().split("-");   
+               
+                simpli.forEach((Bits simpli1) -> {
+                    System.out.println("Entro simpli con: "+ simpli1.getPosicionTabla());
+                    String sd[]=simpli1.getPosicionTabla().split("-");
+                    
                     for (String sim : sd) {
-                        System.out.println("Entro a: "+ sim);
+                        System.out.println("Entro simpli sa: "+ sim);
                         int y = Integer.parseInt(sim);
                         
                             
                         if(y == z){
                             System.out.println("Entro: "+ z+ " = "+y);
-                            cfinal1.setMarca(-1);
-                            System.out.println("Marca de : "+ cfinal1.getPosicionTabla()+ " existe: "+cfinal1.getMarca());
+                            Simplificar.setMarca(-1);
+                            System.out.println("Marca de : "+ Simplificar.getPosicionTabla()+ " existe: "+Simplificar.getMarca());
                             break;
                         }
                     }
-                });
+                    
+                });   
             }
-            if(cfinal1.getMarca()!=-1){
-                simpli.add(cfinal1);
+            if(Simplificar.getMarca()!=-1){
+                
+                for(int i=0; i<this.minterminos.length; i++){
+                    
+                    for(int y=0; y<datos.length;y++){
+                        if(this.minterminos[i] == Integer.parseInt(datos[y])){
+                            aux=true;
+                            break;
+                        }
+                    }
+                }
+                if(aux){
+                    simpli.add(Simplificar);
+                }
             }
         });
         
-        minusterminos.forEach((Elemento cfinal1) -> {
-            System.out.println("Marca de : "+ cfinal1.getPosicionTabla()+ " existe: "+cfinal1.getMarca());
+        minusterminos.forEach((Bits Simplificar) -> {
+            System.out.println("Marca de : "+ Simplificar.getPosicionTabla()+ " existe: "+Simplificar.getMarca());
             
         });
         
@@ -263,9 +281,9 @@ public class Mac {
         
         for(int i=0;i<simpli.size();i++) {
             if(i==0){
-                this.res = this.res+Interprete.convertir(simpli.get(i).getBit());
+                this.res = this.res+Convertir.convertir(simpli.get(i).getBit());
             }else{
-                this.res = this.res+"+"+Interprete.convertir(simpli.get(i).getBit());
+                this.res = this.res+"+"+Convertir.convertir(simpli.get(i).getBit());
             }
         }
     

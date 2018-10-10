@@ -5,17 +5,38 @@
  */
 package GUI;
 
+import Clases.Minimizar;
+import java.awt.GridLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.ArrayList;
+import javax.swing.*;
+
 /**
  *
  * @author orlando
  */
 public class Main extends javax.swing.JFrame {
 
+    private List<String> text;
+    private List<JLabel> textBit;
+    
+    private ArrayList<String> minterminos;
+    private ArrayList<String[]>bits;
+    
+    private Minimizar m;
     /**
      * Creates new form Main
      */
     public Main() {
         initComponents();
+        text = new ArrayList<>();
+        textBit = new ArrayList<>();
+        
+        minterminos=new ArrayList<>();
+        bits = new ArrayList<>();
+        //this.setLayout(null);
     }
 
     /**
@@ -27,79 +48,36 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        nBits = new javax.swing.JTextField();
+        tabla = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        tabla.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel1.setText("Numero de bits:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3 bits", "4 bits" }));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(nBits, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jButton1))
+        javax.swing.GroupLayout tablaLayout = new javax.swing.GroupLayout(tabla);
+        tabla.setLayout(tablaLayout);
+        tablaLayout.setHorizontalGroup(
+            tablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 274, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(nBits, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(31, 31, 31))
+        tablaLayout.setVerticalGroup(
+            tablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 497, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
+            .addComponent(tabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tabla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        Tabla t = new Tabla();
-//        t.setBits(Integer.parseInt(nBits.getText()));
-//        t.setTabla();
-//        t.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,10 +115,55 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField nBits;
+    private javax.swing.JPanel tabla;
     // End of variables declaration//GEN-END:variables
+
+    void setTabla(int nBits) {
+        int t = nBits;
+        int g = t+1;
+        
+        GridLayout g1 = new GridLayout(g,0);
+        
+        tabla.setLayout(g1);
+        tabla.updateUI();
+        
+        int tFinal = (int)Math.pow(2,t);
+        int longT = Integer.toString(tFinal).length();
+        for(int i=0;i<tFinal;i++) {
+            JLabel nDec = new JLabel(""+i);
+            for(int j=0;j<longT;j++) {
+                if(nDec.getText().length()<longT) {
+                    nDec.setText(" "+nDec.getText());
+                }
+            }
+            
+            JTextField S = new JTextField();
+            //S.setSize(20, 20);
+            S.addKeyListener(new KeyAdapter() {
+                public void keyTyped(KeyEvent e) {
+                    char caracter = e.getKeyChar();
+                    if(caracter!='0'&&caracter!='1'&&caracter!='x'||S.getText().length()==1) {
+                        e.consume();
+                    }
+                }
+            });
+            
+            JLabel nBin = new JLabel();
+            String bin = Integer.toBinaryString(i);
+            nBin.setText(bin);
+            System.out.println(""+i+": "+bin);
+            for(int j=0;j<t;j++) {
+                if(nBin.getText().length()<t) {
+                    nBin.setText("0"+nBin.getText());
+                }
+            }
+            
+            
+            this.text.add(bin);
+            tabla.add(nDec);
+            tabla.add(nBin);
+            tabla.add(S);
+            tabla.updateUI();
+        }
+    }
 }

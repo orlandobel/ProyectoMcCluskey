@@ -26,19 +26,19 @@ public class Test {
         String v10[] = new String[]{"1","1","1","0"};
         String v11[] = new String[]{"1","1","1","1"};
         
-        Elemento e1 = new Elemento(v1,"0");
-        Elemento e2 = new Elemento(v2,"1");
-        Elemento e3 = new Elemento(v3,"2");
-        Elemento e4 = new Elemento(v4,"3");
-        Elemento e5 = new Elemento(v5,"4");
-        Elemento e6 = new Elemento(v6,"7");
-        Elemento e7 = new Elemento(v7,"9");
-        Elemento e8 = new Elemento(v8,"10");
-        Elemento e9 = new Elemento(v9,"13");
-        Elemento e10 = new Elemento(v10,"14");
-        Elemento e11 = new Elemento(v11,"15");
+        Bits e1 = new Bits(v1,"0");
+        Bits e2 = new Bits(v2,"1");
+        Bits e3 = new Bits(v3,"2");
+        Bits e4 = new Bits(v4,"3");
+        Bits e5 = new Bits(v5,"4");
+        Bits e6 = new Bits(v6,"7");
+        Bits e7 = new Bits(v7,"9");
+        Bits e8 = new Bits(v8,"10");
+        Bits e9 = new Bits(v9,"13");
+        Bits e10 = new Bits(v10,"14");
+        Bits e11 = new Bits(v11,"15");
         
-        Mac m = new Mac(min);
+        Minimizar m = new Minimizar(min);
         m.Agregar(e1);
         m.Agregar(e2);
         m.Agregar(e3);

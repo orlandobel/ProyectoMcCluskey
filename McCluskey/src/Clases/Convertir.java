@@ -9,7 +9,7 @@ package Clases;
  *
  * @author orlando
  */
-public class Interprete {
+public class Convertir {
     
     public static String convertir(String[] bit) {
         String aux=" ";

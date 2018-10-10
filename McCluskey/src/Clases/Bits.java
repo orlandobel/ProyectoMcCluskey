@@ -9,7 +9,7 @@ package Clases;
  *
  * @author orlando
  */
-public class Elemento {
+public class Bits {
     private int unos;
     private int posUX[];
     private int posX[];
@@ -17,7 +17,7 @@ public class Elemento {
     private String bit[];
     private String posicionTabla;
     
-    public Elemento(String b[],String posicion) {
+    public Bits(String b[],String posicion) {
         this.bit = b;
         this.posicionTabla = posicion;
         this.unos=0;
