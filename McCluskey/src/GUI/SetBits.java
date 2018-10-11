@@ -124,6 +124,7 @@ public class SetBits extends javax.swing.JFrame {
         Main m = new Main();
         m.setTabla(Integer.parseInt(bits.getText()));
         m.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

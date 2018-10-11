@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Clases.Bits;
 import Clases.Minimizar;
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
@@ -19,11 +20,12 @@ import javax.swing.*;
  */
 public class Main extends javax.swing.JFrame {
 
-    private List<String> text;
-    private List<JLabel> textBit;
+    private List<String> entrada;
+    private List<JTextField> salida;
+    private List<String> pos;
     
-    private ArrayList<String> minterminos;
-    private ArrayList<String[]>bits;
+    private ArrayList<Bits> terminos;
+    private int[] minterminos;
     
     private Minimizar m;
     /**
@@ -31,12 +33,12 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        text = new ArrayList<>();
-        textBit = new ArrayList<>();
+        entrada = new ArrayList<>();
+        salida = new ArrayList<>();
+        pos = new ArrayList<>();
         
-        minterminos=new ArrayList<>();
-        bits = new ArrayList<>();
-        //this.setLayout(null);
+        terminos = new ArrayList<>();
+        this.setLayout(null);
     }
 
     /**
@@ -48,36 +50,139 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane5 = new javax.swing.JScrollPane();
+        panel4 = new javax.swing.JPanel();
+        tablaPanel = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        Minimizar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+
+        jScrollPane5.setBackground(new java.awt.Color(255, 255, 255));
+
+        panel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout panel4Layout = new javax.swing.GroupLayout(panel4);
+        panel4.setLayout(panel4Layout);
+        panel4Layout.setHorizontalGroup(
+            panel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 209, Short.MAX_VALUE)
+        );
+        panel4Layout.setVerticalGroup(
+            panel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 306, Short.MAX_VALUE)
+        );
+
+        jScrollPane5.setViewportView(panel4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabla.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane6.setBackground(new java.awt.Color(255, 255, 255));
+
+        tabla.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout tablaLayout = new javax.swing.GroupLayout(tabla);
         tabla.setLayout(tablaLayout);
         tablaLayout.setHorizontalGroup(
             tablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 209, Short.MAX_VALUE)
         );
         tablaLayout.setVerticalGroup(
             tablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 497, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
+        );
+
+        jScrollPane6.setViewportView(tabla);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        Minimizar.setText("Minimizar");
+        Minimizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MinimizarActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Nuevo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Minimizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Minimizar)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout tablaPanelLayout = new javax.swing.GroupLayout(tablaPanel);
+        tablaPanel.setLayout(tablaPanelLayout);
+        tablaPanelLayout.setHorizontalGroup(
+            tablaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        tablaPanelLayout.setVerticalGroup(
+            tablaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablaPanelLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tablaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(tablaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        SetBits sb = new SetBits();
+        sb.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void MinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinimizarActionPerformed
+        pasar();
+        Resultado r = new Resultado();
+        m = new Minimizar(minterminos);
+        for(int i=0;i<terminos.size();i++) {
+            Bits b = terminos.get(i);
+            m.Agregar(b);
+        }
+        m.Agrupacion();
+        r.setInstance(this,m.getRes());
+        r.mostrar();
+        r.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_MinimizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,30 +220,31 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Minimizar;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JPanel panel4;
     private javax.swing.JPanel tabla;
+    private javax.swing.JPanel tablaPanel;
     // End of variables declaration//GEN-END:variables
 
-    void setTabla(int nBits) {
+    public void setTabla(int nBits) {
         int t = nBits;
-        int g = t+1;
+        //int g = t+1;
         
-        GridLayout g1 = new GridLayout(g,0);
-        
+        GridLayout g1 = new GridLayout(0,3);
         tabla.setLayout(g1);
         tabla.updateUI();
         
         int tFinal = (int)Math.pow(2,t);
-        int longT = Integer.toString(tFinal).length();
         for(int i=0;i<tFinal;i++) {
+            //JPanel p = new JPanel();
+            
             JLabel nDec = new JLabel(""+i);
-            for(int j=0;j<longT;j++) {
-                if(nDec.getText().length()<longT) {
-                    nDec.setText(" "+nDec.getText());
-                }
-            }
             
             JTextField S = new JTextField();
-            //S.setSize(20, 20);
             S.addKeyListener(new KeyAdapter() {
                 public void keyTyped(KeyEvent e) {
                     char caracter = e.getKeyChar();
@@ -159,11 +265,52 @@ public class Main extends javax.swing.JFrame {
             }
             
             
-            this.text.add(bin);
+            this.entrada.add(nBin.getText());
+            this.salida.add(S);
+            this.pos.add(nDec.getText());
             tabla.add(nDec);
             tabla.add(nBin);
             tabla.add(S);
             tabla.updateUI();
+            tabla.updateUI();
         }
+    }
+    
+    public void pasar() {
+        for(int i=0;i<entrada.size();i++) {
+            String s = salida.get(i).getText();
+            if(s.equals("1")||s.equals("x")) {
+                String[] aux = new String[entrada.get(i).length()];
+                
+                for(int j=0;j<entrada.get(i).length();j++) {
+                    aux[j] = ""+entrada.get(i).charAt(j);
+                }
+                Bits b = new Bits(aux,pos.get(i),salida.get(i).getText());
+                terminos.add(b);
+            }
+        }
+        
+        minterminos = new int[terminos.size()];
+        for(int i=0;i<terminos.size();i++) {
+            minterminos[i] = Integer.parseInt(terminos.get(i).getPosicionTabla());
+        }
+    }
+
+    public void Reiniciar() {
+        int t = terminos.size();
+        for(int i=0;i<t;i++) {
+            terminos.remove(0);
+        }
+        
+        minterminos = new int[minterminos.length];
+    }
+    
+    public void setCeros() {
+        int t = terminos.size();
+        for(int i=0;i<t;i++) {
+            terminos.remove(0);
+        }
+        
+        minterminos = new int[minterminos.length];
     }
 }

@@ -15,13 +15,26 @@ public class Bits {
     private int posX[];
     private int marca;
     private String bit[];
+    private String sal;
     private String posicionTabla;
     
     public Bits(String b[],String posicion) {
         this.bit = b;
         this.posicionTabla = posicion;
-        this.unos=0;
+        this.unos = 0;
         this.marca = 0;
+        
+        Contar();
+        PosicionUX();
+        PosicionX();
+    }
+    
+    public Bits(String b[],String posicion,String s) {
+        this.bit = b;
+        this.posicionTabla = posicion;
+        this.unos = 0;
+        this.marca = 0;
+        this.sal = s;
         
         Contar();
         PosicionUX();
@@ -121,5 +134,9 @@ public class Bits {
 
     public void setPosicionTabla(String posicionTabla) {
         this.posicionTabla = posicionTabla;
+    }
+    
+    public String getSal() {
+        return this.sal;
     }
 }
