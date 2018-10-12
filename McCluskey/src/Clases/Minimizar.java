@@ -80,7 +80,10 @@ public class Minimizar {
                             
                             int u = 0;
                             int x = 0;
-
+                            int d = 0;
+                            if(unI==0&&unJ>1) {
+                                d=2;
+                            } else {
                             for(int l=0;l<unI;l++) {
                                 try {
                                     for(int m=0;m<unJ;m++) {
@@ -97,8 +100,9 @@ public class Minimizar {
                                         }
                                     }
                                 } catch(Exception e) {
-//                                    System.out.println("Error");
+                                    //System.out.println("Error");
                                 }
+                            }
                             }
                             if(inicio==false){
                                 for(int l=0;l<xI;l++) {
@@ -117,7 +121,7 @@ public class Minimizar {
                             }
 
                             try {
-                                if(u>=grupo.get(ii).get(j).getPosUX().length) {
+                                if(u>=grupo.get(ii).get(j).getPosUX().length&&d<2) {
                                     if(x>=grupo.get(ii).get(j).getPosX().length) {
                                         String[] aux = new String[grupo.get(ii).get(j).getBit().length];
                                         for(int n=0;n<grupo.get(ii).get(0).getBit().length;n++) {
@@ -167,6 +171,9 @@ public class Minimizar {
                     }
                 }
                 grupo.remove(0);
+                if(minusterminos.size()==1&&minusterminos.get(0).getPosicionTabla().equals("0")) {
+                    break;
+                }
             }
         
             for(int i=0;i<grupo2.size();i++) {
@@ -207,8 +214,9 @@ public class Minimizar {
                 String datos[]=Simplificar.getPosicionTabla().split("-");
                 for (String dato : datos) {
                     int y = Integer.parseInt(dato);
-                    if (y==this.minterminos[z]){
+                    if (y==this.minterminos[z] && Simplificar.getMarca()!=-1){
                         simpli.add(Simplificar);
+                        Simplificar.setMarca(-1);
                         System.out.println("Entro nuevo mintermino");
                         break;
                     }
@@ -250,6 +258,10 @@ public class Minimizar {
                             Simplificar.setMarca(-1);
                             System.out.println("Marca de : "+ Simplificar.getPosicionTabla()+ " existe: "+Simplificar.getMarca());
                             break;
+                        }else{
+                            if(Simplificar.getMarca()==-1){
+                                Simplificar.setMarca(0);
+                            }
                         }
                     }
                     

@@ -290,19 +290,21 @@ public class Main extends javax.swing.JFrame {
             }
         }
         
-        minterminos = new int[terminos.size()];
-        for(int i=0;i<terminos.size();i++) {
-            minterminos[i] = Integer.parseInt(terminos.get(i).getPosicionTabla());
-        }
-    }
-
-    public void Reiniciar() {
-        int t = terminos.size();
-        for(int i=0;i<t;i++) {
-            terminos.remove(0);
+        int t = 0;
+        for(int j=0;j<terminos.size();j++) {
+            if(terminos.get(j).getSal().equals("1")) {
+                t++;
+            }
         }
         
-        minterminos = new int[minterminos.length];
+        minterminos = new int[t];
+        int j=0;
+        for(int i=0;i<terminos.size();i++) {
+            if(terminos.get(i).getSal().equals("1")) {
+                minterminos[j] = Integer.parseInt(terminos.get(i).getPosicionTabla());
+                j++;
+            }
+        }
     }
     
     public void setCeros() {
