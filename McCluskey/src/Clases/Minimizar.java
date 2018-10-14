@@ -79,8 +79,8 @@ public class Minimizar {
                 for(int j=0;j<=grupo.get(ii).size();j++) { //movimiento en la agrupacion con ii elementos
                     try {
                         for(int k=0;k<grupo.get(jj).size();k++) { //movimiento en la agrupacion con jj elementos
-                            int unI = grupo.get(ii).get(0).getPosUX().length; //numero de unos en la posicion ii de la agrupación
-                            int unJ = grupo.get(jj).get(0).getPosUX().length; //numero de unos en la posicion jj de la agrupación
+                            int unI = grupo.get(ii).get(0).getPosU().length; //numero de unos en la posicion ii de la agrupación
+                            int unJ = grupo.get(jj).get(0).getPosU().length; //numero de unos en la posicion jj de la agrupación
                             
                             int xI = grupo.get(ii).get(0).getPosX().length; //numero de 'x' en la agrupacion ii de la agrupación
                             int xJ = grupo.get(jj).get(0).getPosX().length; //numeros de x'' en la posicion jj de la agrupación
@@ -96,12 +96,12 @@ public class Minimizar {
                                     try {
                                         for(int m=0;m<unJ;m++) { //movimiento en las posiciones de los unos en jj
                                             if(inicio==true){ //este bloque solo se reproduce si es la primer minimización
-                                                if(grupo.get(ii).get(j).getPosUX()[l]==grupo.get(jj).get(k).getPosUX()[m]) {
+                                                if(grupo.get(ii).get(j).getPosU()[l]==grupo.get(jj).get(k).getPosU()[m]) {
                                                     u++; //si la posición l del primer termino es igual a la posicion m del segundo termino el contador u aumenta en uno
                                                 }
                                             } else { //si es la segunda minimización o superior entra en este bloque
                                                 if(grupo.get(ii).get(j).getPosX()[0]==grupo.get(jj).get(k).getPosX()[0]) { //compara si las primeras posiciones de los terminos son iguales
-                                                    if(grupo.get(ii).get(j).getPosUX()[l]==grupo.get(jj).get(k).getPosUX()[m]) {
+                                                    if(grupo.get(ii).get(j).getPosU()[l]==grupo.get(jj).get(k).getPosU()[m]) {
                                                         u++; //realiza la misma accion que el bloque anterior
                                                     }
                                                 }
@@ -135,7 +135,7 @@ public class Minimizar {
                             
                             /*------------------------------------------agrupación de terminos coincidentes------------------------------------------*/
                             try {
-                                if(u>=grupo.get(ii).get(j).getPosUX().length&&d<2) { //si 'u' es mayor o igual a la cantidad de unos del termino en ii y además 'd'<2
+                                if(u>=grupo.get(ii).get(j).getPosU().length&&d<2) { //si 'u' es mayor o igual a la cantidad de unos del termino en ii y además 'd'<2
                                     if(x>=grupo.get(ii).get(j).getPosX().length) { //si 'x' es mayor o igual que la cantidad de x del termino en ii
                                         String[] aux = new String[grupo.get(ii).get(j).getBit().length]; //String auxiliar para el nuevo bit
                                         /*----------------------------genera el nuevo binario----------------------------*/
@@ -331,6 +331,6 @@ public class Minimizar {
         /*------------------------------------------------------------------------*/
     }
     public String getRes() {
-        return this.res;
+        return this.res; // retorna el resultado para su impreción en pantalla
     }
 }
