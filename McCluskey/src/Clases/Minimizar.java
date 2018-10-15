@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class Minimizar {
  
-    private ArrayList<Bits> tabla; //almacena los terminos dew la tabla que se van a minimizar
+    private ArrayList<Bits> tabla; //almacena los terminos de la tabla que se van a minimizar
     private int[] minterminos; //almacena los numeros en decimal cullo valor de salida sea 1
     private int min; //número más pequeño
     private int max; //número más grande
@@ -92,7 +92,7 @@ public class Minimizar {
                                 d=2; // cuando los terminos en ii no tienen unos pero los de jj tienen dos unos o mas
                             } else {
                                 /*----------------------------comparacion de la posicion de los unos----------------------------*/
-                                for(int l=0;l<unI;l++) { //movimiento en las posiciones de los inos en ii
+                                for(int l=0;l<unI;l++) { //movimiento en las posiciones de los unos en ii
                                     try {
                                         for(int m=0;m<unJ;m++) { //movimiento en las posiciones de los unos en jj
                                             if(inicio==true){ //este bloque solo se reproduce si es la primer minimización
@@ -214,40 +214,41 @@ public class Minimizar {
         /*-------------------------------------------------------------------------------------------------------------------------------------------*/
         
         //Parte de memo D:
-        ArrayList<Bits> simpli = new ArrayList<>();
-        int[] cuantos = new int[this.minterminos.length];
+        ArrayList<Bits> simpli = new ArrayList<>(); // genero un arreglo de bits para simplificar el arreglo de bits de componentes primos("minusterminos")
+        int[] cuantos = new int[this.minterminos.length]; // este arreglo de enteros es para saber cuantas veces encuentro un elemento de los minterminos definidos
         
-        for(int x=0; x<this.minterminos.length;x++){
-            int z= this.minterminos[x];
-            int xy=x;
-            cuantos[x]=0;
+        for(int x=0; x<this.minterminos.length;x++){//recorro mis minterminos
+            int z= this.minterminos[x];//guardo el mintermino 
+            int xy=x;// y su posicion en el arreglo
+            cuantos[x]=0;// mi arreglo en esa posicion la inicializo en 0
            
-            minusterminos.forEach((Bits Simplificar) -> {
-                String datos[]=Simplificar.getPosicionTabla().split("-");
+            minusterminos.forEach((Bits Simplificar) -> { // recorro todos los elementos del arreglo dado (minusterminos)
+                String datos[]=Simplificar.getPosicionTabla().split("-"); // separo los decimales del bit, para obtener los numeros decimales del mismo
                 
-                for (String dato : datos) {
-                    int y = Integer.parseInt(dato);
+                for (String dato : datos) {// para cada elemento del bit
+                    int y = Integer.parseInt(dato); // se transforma de un String a un entero
                     
-                    if(z==y){
+                    if(z==y){ // si mi numero guardado "z" (mintemino guardado) y "y" (numero del bit) son iguales entra
                       
-                      cuantos[xy]++;
+                      cuantos[xy]++;// agrego 1 a cuantos econtre en la posicion del arreglo 
                       break;
                     }
                 }
             });
         }
-        for (int x =0; x<cuantos.length;x++){
+        for (int x =0; x<cuantos.length;x++){// recorro todos mis contadores
             
-            int z=x;
-            if (cuantos[x]==1){
-                minusterminos.forEach((Bits Simplificar) -> {
-                String datos[]=Simplificar.getPosicionTabla().split("-");
-                for (String dato : datos) {
-                    int y = Integer.parseInt(dato);
-                    if (y==this.minterminos[z] && Simplificar.getMarca()!=-1){
-                        simpli.add(Simplificar);
-                        Simplificar.setMarca(-1);
-                        System.out.println("Entro nuevo mintermino");
+            int z=x;// guardo la posicion de ese numero
+            if (cuantos[x]==1){// si encontre un dato que solo existe una vez en todos mis componentes primos y pertenece a los minterminos 
+                minusterminos.forEach((Bits Simplificar) -> {//busco ese elemento
+                String datos[]=Simplificar.getPosicionTabla().split("-"); // para que tenga sentido mi busqueda a cada bit le separo los decimales que forma
+                for (String dato : datos) {// y por cada decimal
+                    int y = Integer.parseInt(dato);// transformo y 
+                    if (y==this.minterminos[z] && Simplificar.getMarca()!=-1){//comparo donde esta, la marca que estoy comparando siempre deberia estar en 0
+                        //pero si 2 o más decimales se encuentran en el mismo bit solo una vez, genero una marca para no agarrar varias veces el mismo elemento. 
+                        simpli.add(Simplificar);//agrego elemento
+                        Simplificar.setMarca(-1);// marco con -1 el elemento
+                        System.out.println("Entro nuevo mintermino");// impresion de debugeo
                         break;
                     }
                 }
@@ -258,58 +259,55 @@ public class Minimizar {
             
             System.out.println("Marca de : "+ Simplificar.getPosicionTabla()+ " existe: "+Simplificar.getMarca());
             
-        });
+        }); // imprecion de todos los datos con las marcas dadas
         simpli.forEach((Bits simplif)->{
             minusterminos.remove((Bits) simplif);
-        });
+        });//cada elemento agregado a mi solucion simplificada se elimina de los componentes primos
         
         //fin de 1 sola solución
 
-        minusterminos.forEach((Bits Simplificar) -> {
-            System.out.println("Entro dato con: "+ Simplificar.getPosicionTabla());
-            String datos[]=Simplificar.getPosicionTabla().split("-");
-            boolean aux=false;
+        minusterminos.forEach((Bits Simplificar) -> { //Busco mis componentes primos, los restantes 
+            System.out.println("Entro dato con: "+ Simplificar.getPosicionTabla());// impresion de debugeo
+            String datos[]=Simplificar.getPosicionTabla().split("-");// separo mis decimales del bit para comparar
+            boolean aux=false;// booleano que me dice si el elemento no marcado tiene un mintermino
             
-            for (String dato : datos) {   
-                System.out.println("Entro dato a: "+ dato);
-                int z= Integer.parseInt(dato);
+            for (String dato : datos) {   //por cada decimal del bit del componente primo
+                System.out.println("Entro dato a: "+ dato);//impresion de debugeo
+                int z= Integer.parseInt(dato);// igualo el decimal a un entero 
                
-                simpli.forEach((Bits simpli1) -> {
-                    System.out.println("Entro simpli con: "+ simpli1.getPosicionTabla());
-                    String sd[]=simpli1.getPosicionTabla().split("-");
+                simpli.forEach((Bits simpli1) -> { //por cada elemento de simpli
+                    System.out.println("Entro simpli con: "+ simpli1.getPosicionTabla());// impresion de debugeo
+                    String sd[]=simpli1.getPosicionTabla().split("-"); // separo los decimales del elemento 
                     
-                    for (String sim : sd) {
-                        System.out.println("Entro simpli sa: "+ sim);
-                        int y = Integer.parseInt(sim);
+                    for (String sim : sd) {// y por cada decimal de mis simplificados 
+                        System.out.println("Entro simpli sa: "+ sim);//impresion de debugeo
+                        int y = Integer.parseInt(sim);// convierto ese decimal a un entero
                         
                             
-                        if(y == z){
-                            System.out.println("Entro: "+ z+ " = "+y);
-                            Simplificar.setMarca(-1);
-                            System.out.println("Marca de : "+ Simplificar.getPosicionTabla()+ " existe: "+Simplificar.getMarca());
-                            break;
-                        }else{
-                            if(Simplificar.getMarca()==-1){
-                                Simplificar.setMarca(0);
-                            }
+                        if(y == z){ // si existe el decimal de mi componente primo en alguno de los datos simplificados
+                            System.out.println("Entro: "+ z+ " = "+y);// impresion de debugeo
+                            Simplificar.setMarca(-1);// marco el dato 
+                            System.out.println("Marca de : "+ Simplificar.getPosicionTabla()+ " existe: "+Simplificar.getMarca());// imprimo que el dato se marco
+                            break;// paso al siguiente elemento de mi simplificacion
                         }
                     }
                     
                 });   
             }
-            if(Simplificar.getMarca()!=-1){
+            
+            if(Simplificar.getMarca()!=-1){ // si la marca del elemento es distinta a -1
                 
-                for(int i=0; i<this.minterminos.length; i++){
+                for(int i=0; i<this.minterminos.length; i++){// busco con mis minterminos si 
                     
-                    for(int y=0; y<datos.length;y++){
-                        if(this.minterminos[i] == Integer.parseInt(datos[y])){
-                            aux=true;
-                            break;
+                    for(int y=0; y<datos.length;y++){// alguno de los datos de del elemento es igual al mintermino
+                        if(this.minterminos[i] == Integer.parseInt(datos[y])){// en caso de ser asi
+                            aux=true;// encontre un bit con minterminos 
+                            break;// me salgo de aqui 
                         }
                     }
                 }
-                if(aux){
-                    simpli.add(Simplificar);
+                if(aux){ // si tuve exito encontrando un mintermino nuevo que no se habia agregado
+                    simpli.add(Simplificar);// lo agrego a los simplificados 
                 }
             }
         });
@@ -317,8 +315,12 @@ public class Minimizar {
         minusterminos.forEach((Bits Simplificar) -> {
             System.out.println("Marca de : "+ Simplificar.getPosicionTabla()+ " existe: "+Simplificar.getMarca());
             
-        });
+        });// impresiones de comprobacion de marcas final, debugeos
         
+        //En caso de tener más de una solucion, este codigo no te da la simplificacion más optima,
+        //te da la primera solucion que encuentra, de la manera empirica que usted nos enseño.
+        //por eso algunas soluciones tendran  un o más minterminos en más de una agrupacion de bits,
+        // y tampoco se ocupa de agarrar el numero menor de x, por esos detalles, la solucion es suficiente, pero no optima.
         
         /*---------------------Genera el resultado minimizado---------------------*/
         for(int i=0;i<simpli.size();i++) {

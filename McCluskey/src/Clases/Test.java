@@ -12,7 +12,7 @@ package Clases;
 public class Test {
     public static void main(String[] args) {
         // TODO code application logic here
-        int min[] = new int[]{4,7,9,10};
+        int min[] = new int[]{3,4,7,9,10};
         
         String v1[] = new String[]{"0","0","0","0"};//
         String v2[] = new String[]{"0","0","0","1"};//
