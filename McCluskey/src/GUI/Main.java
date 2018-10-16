@@ -77,6 +77,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane5.setViewportView(panel4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jScrollPane6.setBackground(new java.awt.Color(255, 255, 255));
 
